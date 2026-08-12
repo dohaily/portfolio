@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Đỗ Hải Ly — Marketing Portfolio 2026</title>
+<meta name="description" content="Portfolio Marketing Manager Đỗ Hải Ly — Retail & Education Marketing, AI-enabled Marketing Operations" />
+<style>
+  :root{
+    --navy:#16384d;
+    --cream:#f8f3ea;
+    --tan:#c58b59;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#0d2333;
+    font-family:'Segoe UI', Arial, sans-serif;
+    color:#1f2933;
+  }
+  header.hero{
+    padding:28px 16px 18px;
+    text-align:center;
+    background:linear-gradient(180deg,#0d2333,#16384d);
+    color:#fff;
+  }
+  header.hero h1{
+    margin:0 0 6px;
+    font-size:clamp(22px,4vw,34px);
+    letter-spacing:.5px;
+  }
+  header.hero p{
+    margin:0;
+    color:#dce7ee;
+    font-size:clamp(13px,2.4vw,16px);
+  }
+  .contact-bar{
+    margin-top:14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    font-size:13px;
+  }
+  .contact-bar span{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.25);
+    padding:5px 12px;
+    border-radius:999px;
+  }
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:18px 12px 60px;
+  }
+  .slide-card{
+    background:var(--cream);
+    border-radius:14px;
+    overflow:hidden;
+    margin:22px 0;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .slide-card img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .slide-index{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:10px 0 4px;
+  }
+  .slide-index a{
+    color:#dce7ee;
+    text-decoration:none;
+    font-size:12px;
+    background:rgba(255,255,255,.08);
+    padding:4px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.2);
+  }
+  .slide-index a:hover{
+    background:var(--tan);
+    color:#16384d;
+  }
+  footer{
+    text-align:center;
+    color:#9fb4c2;
+    padding:26px 12px 40px;
+    font-size:13px;
+  }
+  .backtotop{
+    position:fixed;
+    right:16px;
+    bottom:16px;
+    background:var(--tan);
+    color:#16384d;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow:0 6px 16px rgba(0,0,0,.35);
+  }
+</style>
+</head>
+<body>
+  <a id="top"></a>
+  <header class="hero">
+    <h1>ĐỖ HẢI LY</h1>
+    <p>Marketing Leader - Retail &amp; Education Marketing</p>
+    <div class="contact-bar">
+      <span>📞 0985775198</span>
+      <span>✉️ dohailygtm126@gmail.com</span>
+      <span>📍 Hà Nội</span>
+    </div>
+    <div class="slide-index" id="slideIndex"></div>
+  </header>
+
+  <main id="slides"></main>
+
+  <footer>
+    Portfolio 2026 · Đỗ Hải Ly · Cập nhật bởi trợ lý AI
+  </footer>
+
+  <a class="backtotop" href="#top" title="Lên đầu trang">↑</a>
+
+  <script>
+    const totalSlides = 14;
+    const slidesEl = document.getElementById('slides');
+    const indexEl = document.getElementById('slideIndex');
+    for (let i = 1; i <= totalSlides; i++) {
+      const num = String(i).padStart(2, '0');
+      const card = document.createElement('section');
+      card.className = 'slide-card';
+      card.id = 'slide-' + i;
+      card.innerHTML = `<img src="slide_${num}.png" alt="Portfolio slide ${i}" loading="lazy" />`;
+      slidesEl.appendChild(card);
+
+      const a = document.createElement('a');
+      a.href = '#slide-' + i;
+      a.textContent = i;
+      indexEl.appendChild(a);
+    }
+  </script>
+</body>
+</html>

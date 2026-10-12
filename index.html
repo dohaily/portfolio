@@ -108,6 +108,83 @@
     font-weight:700;
     box-shadow:0 6px 16px rgba(0,0,0,.35);
   }
+  .case-detail{
+    background:#fff;
+    border-radius:14px;
+    margin:-10px 0 22px;
+    padding:20px 22px 24px;
+    box-shadow:0 12px 30px rgba(0,0,0,.25);
+    border:1px solid rgba(0,0,0,.05);
+  }
+  .case-detail h3{
+    margin:0 0 10px;
+    color:var(--navy);
+    font-size:16px;
+    letter-spacing:.3px;
+  }
+  .case-detail .brief{
+    font-size:13.5px;
+    line-height:1.55;
+    color:#3a4650;
+    margin:0 0 14px;
+    padding-left:12px;
+    border-left:3px solid var(--tan);
+  }
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:0 0 14px;
+  }
+  .flow span{
+    background:var(--navy);
+    color:#fff;
+    font-size:11.5px;
+    padding:5px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .flow span:nth-child(even){
+    background:var(--tan);
+    color:#16384d;
+  }
+  .impact-box{
+    background:linear-gradient(135deg,#fff3e6,#fde9d2);
+    border:1px solid var(--tan);
+    border-radius:10px;
+    padding:14px 16px;
+  }
+  .impact-box .label{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.8px;
+    color:#8a5a28;
+    margin-bottom:8px;
+  }
+  .impact-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+  }
+  .impact-grid .metric{
+    min-width:110px;
+  }
+  .impact-grid .metric b{
+    display:block;
+    font-size:19px;
+    color:var(--navy);
+    line-height:1.1;
+  }
+  .impact-grid .metric span{
+    font-size:11.5px;
+    color:#5b4632;
+  }
+  .impact-box .note{
+    font-size:11.5px;
+    color:#7a6650;
+    margin-top:8px;
+    font-style:italic;
+  }
 </style>
 </head>
 <body>
@@ -135,18 +212,77 @@
     const totalSlides = 14;
     const slidesEl = document.getElementById('slides');
     const indexEl = document.getElementById('slideIndex');
+
+    // Case study chi tiết: Brief - Process (Research→Insight→Strategy→Plan→Execution→Optimization→Evaluation) - Outcome (impact box)
+    // Chỉ dùng số liệu đã xác nhận; dự án chưa có số liệu cứng sẽ ghi outcome định tính + ghi chú.
+    const caseDetails = {
+      7: {
+        title: 'Bối cảnh & Kết quả — Cuộc thi Đọc Sách Toàn Quốc 2026',
+        brief: '<b>Bối cảnh:</b> Hadosa cần một dự án giáo dục quy mô toàn quốc để mở rộng độ phủ thương hiệu trong lĩnh vực giáo dục và lan tỏa văn hóa đọc. <b>Mục tiêu:</b> tạo sân chơi đọc sách online dễ tham gia, thu hút đông đảo trường học & học sinh, gia tăng nhận diện thương hiệu trong cộng đồng giáo dục.',
+        flow: ['Research: khảo sát hành vi đọc & nhu cầu thi đua của học sinh/nhà trường', 'Insight: trường học cần sân chơi thi đua, dễ tham gia qua nền tảng online', 'Strategy: cuộc thi đọc sách trực tuyến toàn quốc, lấy nhà trường làm kênh lan tỏa', 'Plan: timeline, nội dung câu hỏi, website, vận hành, truyền thông', 'Execution: phối hợp đa phòng ban triển khai & điều phối hoạt động tại trường', 'Optimization: tối ưu thông điệp truyền thông theo từng giai đoạn để tăng tham gia', 'Evaluation: đo bài thi, số trường tham gia, độ phủ báo chí'],
+        metrics: [['219.000+','Bài thi tham gia'],['2.500+','Trường học tham gia'],['7+','Đầu báo/đài lớn đưa tin']],
+        note: 'Báo chí: Nhân Dân, Lao Động, QĐND, VOV, Đại biểu Nhân dân, Người Lao Động, Tuyên Quang.'
+      },
+      10: {
+        title: 'Bối cảnh & Kết quả — Khai trương Chuỗi Nhà sách Hadosa',
+        brief: '<b>Bối cảnh:</b> Hadosa mở rộng chuỗi, cần chuẩn hóa truyền thông khai trương để thu hút khách ngày đầu và đồng bộ trải nghiệm thương hiệu tại từng điểm bán mới. <b>Mục tiêu:</b> xây playbook khai trương có thể nhân rộng cho nhiều chi nhánh.',
+        flow: ['Research: khảo sát dân cư/khách hàng khu vực từng điểm bán mới', 'Insight: mỗi điểm cần thông điệp local hóa nhưng vẫn giữ nhận diện chuỗi', 'Strategy: xây playbook khai trương chuẩn, nhân rộng được', 'Plan: timeline trước-trong-sau, content plan, ngân sách, Trade Marketing/VM', 'Execution: triển khai online-offline, phối hợp event/production/in ấn/PR-KOL', 'Optimization: điều chỉnh playbook sau mỗi lần khai trương dựa trên thực tế', 'Evaluation: đánh giá mức độ nhận diện & vận hành tại điểm bán'],
+        metrics: [['5','Nhà sách đã khai trương'],['1','Playbook khai trương chuẩn hóa, nhân rộng toàn chuỗi']],
+        note: 'Số liệu khách/doanh thu riêng ngày khai trương từng điểm chưa có xác nhận nội bộ, chưa đưa vào để tránh suy diễn.'
+      },
+      11: {
+        title: 'Bối cảnh & Kết quả — Lễ ký kết Kỷ lục Guinness Việt Nam',
+        brief: '<b>Bối cảnh:</b> Sự kiện xác lập kỷ lục Guinness Việt Nam gắn với dự án đọc sách, nhằm tăng uy tín thương hiệu Hadosa trong ngành giáo dục/xuất bản. <b>Mục tiêu:</b> tạo dấu ấn truyền thông chính thống, có thể tái sử dụng tư liệu đa kênh.',
+        flow: ['Research: bối cảnh & tiêu chí xác lập kỷ lục', 'Insight: cần sự kiện có tính chính thống, dễ được báo chí đưa tin', 'Strategy: gắn sự kiện với dự án đọc sách toàn quốc đang triển khai', 'Plan: kịch bản, khách mời, kế hoạch báo chí/truyền hình', 'Execution: điều phối trước-trong-sau sự kiện', 'Optimization: xử lý phát sinh hiện trường, đảm bảo thông điệp nhất quán', 'Evaluation: đo độ phủ truyền thông sau sự kiện'],
+        metrics: [['1','Kỷ lục Guinness Việt Nam được xác lập'],['Đa kênh','Tư liệu truyền thông tái sử dụng']],
+        note: 'Outcome định tính: số liệu reach/PR value cụ thể của riêng sự kiện này chưa có xác nhận nội bộ.'
+      },
+      12: {
+        title: 'Bối cảnh & Kết quả — Ký kết Hợp tác & Ra mắt Thương hiệu',
+        brief: '<b>Bối cảnh:</b> Chương trình ký kết hợp tác/ra mắt thương hiệu cần thông điệp và hình ảnh nhất quán để tạo niềm tin với đối tác, khách hàng và báo chí. <b>Mục tiêu:</b> đảm bảo truyền thông đồng bộ và khai thác nội dung sự kiện cho truyền thông dài hạn.',
+        flow: ['Research: bối cảnh hợp tác, đối tượng truyền thông mục tiêu', 'Insight: đối tác/báo chí cần thông điệp rõ ràng, hình ảnh chuyên nghiệp', 'Strategy: định vị thông điệp hợp tác gắn với chiến lược thương hiệu', 'Plan: kịch bản nội dung, nhận diện hình ảnh, kế hoạch báo chí', 'Execution: phối hợp đối tác, báo chí, vận hành, thiết kế/production', 'Optimization: tận dụng tư liệu sự kiện để phát triển nội dung đa kênh', 'Evaluation: đánh giá mức độ nhất quán thông điệp & khả năng tái sử dụng nội dung'],
+        metrics: [['Nhất quán','Thông điệp & hình ảnh thương hiệu'],['Đa kênh','Nội dung PR/social dài hạn']],
+        note: 'Outcome định tính: chưa có số liệu reach/leads cụ thể được xác nhận cho sự kiện này.'
+      },
+      13: {
+        title: 'Bối cảnh & Kết quả — AI Video & TikTok/Reels System',
+        brief: '<b>Bối cảnh:</b> Đội ngũ cần tối ưu thời gian sản xuất content/video và vận hành CSKH fanpage bằng AI để tăng năng suất với nguồn lực hiện có. <b>Mục tiêu:</b> xây quy trình AI-enabled giúp tiết kiệm thời gian/nhân sự và nâng năng lực sản xuất nội dung.',
+        flow: ['Research: khảo sát công cụ AI phù hợp (ChatGPT, Gemini, Claude, Canva AI, CapCut AI, Grok, Higgfields)', 'Insight: phần lớn thời gian team tốn vào CSKH & dựng video thủ công', 'Strategy: xây AI Agent hỗ trợ CSKH + quy trình sản xuất video bằng AI', 'Plan: content pillar, format video, lịch đăng, hook mở đầu', 'Execution: triển khai AI Agent, đào tạo đội nhóm, sản xuất theo quy trình mới', 'Optimization: tái biên tập nội dung theo từng nền tảng TikTok/Facebook Reels', 'Evaluation: đo thời gian/nhân sự tiết kiệm được'],
+        metrics: [['~80%','Nhân sự & thời gian CSKH fanpage tối ưu bằng AI'],['Nâng cao','Năng lực sản xuất video/content AI của đội nhóm']],
+        note: ''
+      }
+    };
+
     for (let i = 1; i <= totalSlides; i++) {
       const num = String(i).padStart(2, '0');
       const card = document.createElement('section');
       card.className = 'slide-card';
       card.id = 'slide-' + i;
-      card.innerHTML = `<img src="slide_${num}.png" alt="Portfolio slide ${i}" loading="lazy" />`;
+      card.innerHTML = `<img src="slides/slide_${num}.png" alt="Portfolio slide ${i}" loading="lazy" />`;
       slidesEl.appendChild(card);
 
       const a = document.createElement('a');
       a.href = '#slide-' + i;
       a.textContent = i;
       indexEl.appendChild(a);
+
+      const d = caseDetails[i];
+      if (d) {
+        const det = document.createElement('section');
+        det.className = 'case-detail';
+        const flowHtml = d.flow.map(f => `<span>${f}</span>`).join('');
+        const metricsHtml = d.metrics.map(m => `<div class="metric"><b>${m[0]}</b><span>${m[1]}</span></div>`).join('');
+        det.innerHTML = `
+          <h3>${d.title}</h3>
+          <p class="brief">${d.brief}</p>
+          <div class="flow">${flowHtml}</div>
+          <div class="impact-box">
+            <div class="label">KẾT QUẢ NỔI BẬT / IMPACT</div>
+            <div class="impact-grid">${metricsHtml}</div>
+            ${d.note ? `<div class="note">${d.note}</div>` : ''}
+          </div>`;
+        slidesEl.appendChild(det);
+      }
     }
   </script>
 </body>

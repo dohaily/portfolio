@@ -190,6 +190,69 @@
     font-family:inherit;
     color:#5b4632;
   }
+  .cert-section{
+    background:linear-gradient(180deg,var(--cream),#efe5d2);
+    border-radius:14px;
+    margin:22px 0;
+    padding:26px 26px 28px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.06);
+    font-family:'Segoe UI', Arial, sans-serif;
+  }
+  .cert-section .cert-eyebrow{
+    display:inline-block;
+    background:var(--navy);
+    color:#fff;
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.8px;
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:6px;
+  }
+  .cert-section h3{
+    margin:6px 0 4px;
+    color:var(--navy);
+    font-size:22px;
+    letter-spacing:.3px;
+  }
+  .cert-section .cert-sub{
+    font-size:12.5px;
+    color:#6b5a42;
+    margin:0 0 18px;
+  }
+  .cert-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:14px;
+  }
+  .cert-card{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--tan);
+    border-radius:12px;
+    padding:12px 14px;
+  }
+  .cert-card .year-badge{
+    flex:0 0 auto;
+    background:var(--tan);
+    color:var(--navy);
+    font-size:11.5px;
+    font-weight:800;
+    padding:5px 10px;
+    border-radius:8px;
+    white-space:nowrap;
+  }
+  .cert-card .cert-text{
+    font-size:12.5px;
+    line-height:1.45;
+    color:#2d2318;
+  }
+  @media (max-width:640px){
+    .cert-grid{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
@@ -258,6 +321,17 @@
       }
     };
 
+    // Danh sách đầy đủ chứng chỉ & giải thưởng (CV bản rút gọn đã cắt bớt, portfolio hiển thị đủ)
+    const certificates = [
+      ['05/2026', 'Hoàn thành khóa học Full-stack Marketing Warrior'],
+      ['07/2025', 'Giải Nhất khóa học Hoạch định Chiến lược Marketing'],
+      ['2023', 'Certificate kỹ năng nói nâng cao - MVP, MC Trần Ngọc'],
+      ['2020', 'Certificate Digital Marketing - 88Lab'],
+      ['2019', 'Certificate Know Thyself and Know Others with Carl Jung - MBTI'],
+      ['2018', 'Leading and Managing | The Art of Public Speaking | Time Mastery | Live & Aspire'],
+      ['2016', 'Giải Nhất Logo & Slogan']
+    ];
+
     for (let i = 1; i <= totalSlides; i++) {
       const num = String(i).padStart(2, '0');
       const card = document.createElement('section');
@@ -287,6 +361,29 @@
             <div class="impact-grid">${metricsHtml}</div>
           </div>`;
         slidesEl.appendChild(det);
+      }
+
+      // Chèn trang Chứng chỉ & Giải thưởng ngay sau slide Success Stories (13), trước slide Contact (14)
+      if (i === 13) {
+        const certSection = document.createElement('section');
+        certSection.className = 'cert-section';
+        certSection.id = 'certificates';
+        const certCardsHtml = certificates.map(c => `
+          <div class="cert-card">
+            <span class="year-badge">${c[0]}</span>
+            <span class="cert-text">${c[1]}</span>
+          </div>`).join('');
+        certSection.innerHTML = `
+          <span class="cert-eyebrow">HỌC VẤN &amp; PHÁT TRIỂN BẢN THÂN</span>
+          <h3>Chứng chỉ &amp; Giải thưởng</h3>
+          <p class="cert-sub">Đại học Kinh tế Quốc dân (IBD, 2016-2021) và các khóa học/giải thưởng đã hoàn thành trong quá trình làm nghề.</p>
+          <div class="cert-grid">${certCardsHtml}</div>`;
+        slidesEl.appendChild(certSection);
+
+        const aCert = document.createElement('a');
+        aCert.href = '#certificates';
+        aCert.textContent = 'CC';
+        indexEl.appendChild(aCert);
       }
     }
   </script>
